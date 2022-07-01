@@ -109,7 +109,7 @@ MaMon char(10),
 MaLopHP char(10),
 TenMon nvarchar(70),
 SoTC int,
-HocKi int,
+HocKi nvarchar(50),
 NamHoc nvarchar(50),
 TietHoc varchar(30),
 PhongHoc varchar(10),
@@ -117,13 +117,13 @@ GiangVien nvarchar(30)
 )
 drop table tblLSDK;
 
-insert into tblLSDK values ('11201234','KTVM','KTVM-123',N'Kinh tê vi mô',3,'1','2020-2021','Thu 2, tiet 3-4','B-102','Pham Van Dong');
-insert into tblLSDK values ('11201234','KTVN','KTVN-127',N'Kinh tê Việt Nam',3,'2','2020-2021','Thu 3, tiet 3-4','B-104','Nguyen Van Kien');
-insert into tblLSDK values ('11201234','CNXHKH','CNXHKH-002',N'Chủ nghĩa xã hội khoa học',3,'1','2021-2022','Thu 6, tiet 5-6','C-102','Phung Thi Hoa');
-insert into tblLSDK values ('11201234','HTTLQL','HTTTQL-101',N'Hệ thống thông tin',3,'1','2021-2022','Thu 5, tiet 7-8','D1-402','Nguyen Hong Dang');
-insert into tblLSDK values ('11920343','QTKD','QTKD-200',N'Quản trị kinh doanh',3,'1','2020-2021','Thu 3, tiet 3-4','C2-202','Bui Gia Bao');
-insert into tblLSDK values ('11920343','TK','TK-346',N'Thống kê',3,'2','2020-2021','Thu 2, tiet 3-4','B-102','Phan Minh Thu');
-insert into tblLSDK values ('11920343','KTM','KTM-123',N'Kế toán máy',3,'1','2021-2022','Thu 3, tiet 3-4','B2-102','Tran Hoang Son');
+insert into tblLSDK values ('11201234','KTVM','KTVM-123',N'Kinh tê vi mô',3,N'Học kỳ 1','2020-2021','Thu 2, tiet 3-4','B-102','Pham Van Dong');
+insert into tblLSDK values ('11201234','KTVN','KTVN-127',N'Kinh tê Việt Nam',3,N'Học kỳ 2','2020-2021','Thu 3, tiet 3-4','B-104','Nguyen Van Kien');
+insert into tblLSDK values ('11201234','CNXHKH','CNXHKH-002',N'Chủ nghĩa xã hội khoa học',3,N'Học kỳ 1','2021-2022','Thu 6, tiet 5-6','C-102','Phung Thi Hoa');
+insert into tblLSDK values ('11201234','HTTLQL','HTTTQL-101',N'Hệ thống thông tin',3,N'Học kỳ 2','2021-2022','Thu 5, tiet 7-8','D1-402','Nguyen Hong Dang');
+insert into tblLSDK values ('11920343','QTKD','QTKD-200',N'Quản trị kinh doanh',3,N'Học kỳ 1','2020-2021','Thu 3, tiet 3-4','C2-202','Bui Gia Bao');
+insert into tblLSDK values ('11920343','TK','TK-346',N'Thống kê',3,N'Học kỳ 2',N'2020-2021','Thu 2, tiet 3-4','B-102','Phan Minh Thu');
+insert into tblLSDK values ('11920343','KTM','KTM-123',N'Kế toán máy',3,N'Học kỳ 1',N'2021-2022','Thu 3, tiet 3-4','B2-102','Tran Hoang Son');
 select * from tblLSDK;
 delete from tblLSDK;
 
@@ -135,6 +135,5 @@ select * from tblLopHP where MaMon='KTCT';
 
 Select MaMon, TenMon, SoTC from tblMonHoc,tblSV  
 where MaNhomMonHoc='DC'and (tblSV.MaNhomMonHoc=tblMonHoc.MaNhomMonHoc and tblSV.MaSV = '11201234')
-
 
 
