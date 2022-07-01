@@ -21,7 +21,8 @@ create table tblMonHoc(
 MaMon char(10) primary key,
 TenMon nvarchar(50),
 SoTC int,
-MaNhomMonHoc char(30) foreign key references tblNhomMonHoc(MaNhomMonHoc) 
+MaNhomMonHoc char(30) foreign key references tblNhomMonHoc(MaNhomMonHoc),
+MaMonTienQuyet char(10)
 )
 drop table tblMonHoc;
 
@@ -39,7 +40,14 @@ drop table tblLopHP;
 
 create table tblKQDangKi(
 MaSV char(10) foreign key references tblSV(MaSV),
-MaLopHP char(10) foreign key references tblMonHoc(MaMon)
+MaLopHP char(10) foreign key references tblLopHP(MaLopHP),
+TenMon nvarchar(70),
+SoTC int,
+HocKi int,
+NamHoc nvarchar(50),
+TietHoc varchar(30),
+PhongHoc varchar(10),
+GiangVien nvarchar(30),
 )
 drop table tblKQDangKi;
 
@@ -61,15 +69,15 @@ insert into tblSV values('11211343',N'Lê Vũ Quỳnh Trang','123456','HTQL');
 select * from tblSV;
 delete from tblSV;
 
-insert into tblMonHoc values('PTUD',N'Phát triển các ứng dụng trong quản lý',3,'HTQL');
-insert into tblMonHoc values('LTNC',N'Lập trình nâng cao',3,'HTQL');
-insert into tblMonHoc values('UDCSDL',N'Ứng dụng CSDL',3,'HTQL');
-insert into tblMonHoc values('NLKT',N'Nguyên lý kế toán',3,'DC');
-insert into tblMonHoc values('THMLN',N'Triết học Mác - Lênin',3,'DC');
-insert into tblMonHoc values('KTCT',N'Kinh tế chính trị',2,'DC');
-insert into tblMonHoc values('KTQT',N'Kế toán quản trị',3,'KT');
-insert into tblMonHoc values('KTDN',N'Kế toán doanh nghiệp',3,'KT');
-insert into tblMonHoc values('KTTC',N'Kế toán tài chính',3,'KT');
+insert into tblMonHoc values('PTUD',N'Phát triển các ứng dụng trong quản lý',3,'HTQL','UDCDDL');
+insert into tblMonHoc values('LTNC',N'Lập trình nâng cao',3,'HTQL',null);
+insert into tblMonHoc values('UDCSDL',N'Ứng dụng CSDL',3,'HTQL',null);
+insert into tblMonHoc values('NLKT',N'Nguyên lý kế toán',3,'DC',null);
+insert into tblMonHoc values('THMLN',N'Triết học Mác - Lênin',3,'DC',null);
+insert into tblMonHoc values('KTCT',N'Kinh tế chính trị',2,'DC','THMLN');
+insert into tblMonHoc values('KTQT',N'Kế toán quản trị',3,'KT','NLKT');
+insert into tblMonHoc values('KTDN',N'Kế toán doanh nghiệp',3,'KT','NLKT');
+insert into tblMonHoc values('KTTC',N'Kế toán tài chính',3,'KT','NLKT');
 select * from tblMonHoc;
 delete from tblMonHoc;
 
@@ -95,10 +103,38 @@ insert into tblQL values ('111222','Nguyen Van Truong','456789');
 insert into tblQL values ('444555','Tran Dinh Hoang','456789');
 select * from tblQL;
 
+create table tblLSDK(
+MaSV char(10) foreign key references tblSV(MaSV),
+MaMon char(10),
+MaLopHP char(10),
+TenMon nvarchar(70),
+SoTC int,
+HocKi int,
+NamHoc nvarchar(50),
+TietHoc varchar(30),
+PhongHoc varchar(10),
+GiangVien nvarchar(30)
+)
+drop table tblLSDK;
+
+insert into tblLSDK values ('11201234','KTVM','KTVM-123',N'Kinh tê vi mô',3,'1','2020-2021','Thu 2, tiet 3-4','B-102','Pham Van Dong');
+insert into tblLSDK values ('11201234','KTVN','KTVN-127',N'Kinh tê Việt Nam',3,'2','2020-2021','Thu 3, tiet 3-4','B-104','Nguyen Van Kien');
+insert into tblLSDK values ('11201234','CNXHKH','CNXHKH-002',N'Chủ nghĩa xã hội khoa học',3,'1','2021-2022','Thu 6, tiet 5-6','C-102','Phung Thi Hoa');
+insert into tblLSDK values ('11201234','HTTLQL','HTTTQL-101',N'Hệ thống thông tin',3,'1','2021-2022','Thu 5, tiet 7-8','D1-402','Nguyen Hong Dang');
+insert into tblLSDK values ('11920343','QTKD','QTKD-200',N'Quản trị kinh doanh',3,'1','2020-2021','Thu 3, tiet 3-4','C2-202','Bui Gia Bao');
+insert into tblLSDK values ('11920343','TK','TK-346',N'Thống kê',3,'2','2020-2021','Thu 2, tiet 3-4','B-102','Phan Minh Thu');
+insert into tblLSDK values ('11920343','KTM','KTM-123',N'Kế toán máy',3,'1','2021-2022','Thu 3, tiet 3-4','B2-102','Tran Hoang Son');
+select * from tblLSDK;
+delete from tblLSDK;
+
 Select MaMon, TenMon, SoTC from tblMonHoc,tblSV where tblSV.MaNhomMonHoc=tblMonHoc.MaNhomMonHoc and tblSV.MaSV = '11201234';
 
 select * from tblLopHP,tblMonHoc where tblLopHP.MaMon = tblMonHoc.MaMon and tblLopHP.MaMon='KTCT';
 
 select * from tblLopHP where MaMon='KTCT';
+
+Select MaMon, TenMon, SoTC from tblMonHoc,tblSV  
+where MaNhomMonHoc='DC'and (tblSV.MaNhomMonHoc=tblMonHoc.MaNhomMonHoc and tblSV.MaSV = '11201234')
+
 
 
